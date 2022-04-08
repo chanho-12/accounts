@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="accountbookMapper">
+
+   <resultMap type="AccountBook" id="resultAccountBook">
+      <id column="account_num" property="account_num" />
+      <result column="user_id" property="user_id" />
+      <result column="camera_num" property="camera_num" />
+      <result column="cameara_total1" property="cameara_total1" />
+      <result column="cameara_total2" property="cameara_total2" />
+      <result column="cameara_total3" property="cameara_total3" />
+      <result column="accountbookwriter" property="accountbookwriter"/>
+      <result column="account_date" property="account_date"/>
+      <result column="account_date_day" property="account_date_day"/>
+   </resultMap>
+
+   
+   <select id="camera1" resultType="_int" parameterType="string">   
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate, 'yyyymmdd') and USER_ID = 'user01'
+   </select>
+
+   <select id="camera2" resultType="_int" parameterType="string">
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'mm' ) = to_char( sysdate, 'mm') and USER_ID = 'user01'
+   </select>
+   
+   <select id="camera3" resultType="_int" parameterType="string">
+      select SUM(camera_total)  AS camera_total from camera
+      where  to_char( add_months(sysdate,-1), 'yyyy-mm-dd' ) = to_char(add_months(sysdate,-1),'yyyy-mm-dd') and USER_ID = 'user01'   
+   </select>
+   
+   <select id="day1" resultType="_int"  parameterType="string">
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate-4, 'yyyymmdd') and USER_ID = 'user01'
+   </select>
+   
+   <select id="day2" resultType="_int"  parameterType="string">
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate-3, 'yyyymmdd') and USER_ID = 'user01'
+   </select>
+   
+   <select id="day3" resultType="_int"  parameterType="string">
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate-2, 'yyyymmdd') and USER_ID = 'user01'
+   </select>
+   
+   <select id="day4" resultType="_int"  parameterType="string">
+   select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate-1, 'yyyymmdd') and USER_ID = 'user01'
+   </select>            
+   
+   <select id="day5" resultType="_int"  parameterType="string">
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate, 'yyyymmdd') and USER_ID = 'user01'
+   </select>            
+   
+   <select id="day6" resultType="_int"  parameterType="string">
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate+1, 'yyyymmdd') and USER_ID = 'user01'
+   </select>
+   
+   <select id="day7" resultType="_int"  parameterType="string">
+      select SUM(camera_total) AS camera_total from camera
+      where  to_char( CAMERA_DATE, 'yyyymmdd' ) = to_char( sysdate+2, 'yyyymmdd') and USER_ID = 'user01'
+   </select>
+   
+   
+   
+   
+</mapper>
